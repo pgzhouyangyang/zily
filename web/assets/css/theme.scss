@@ -1,0 +1,21 @@
+$primary-color: #00b894;
+
+
+.btn {
+    display: inline-block;
+    line-height: 1;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    color: #999;
+    font-size: 14px;
+    padding: 12px 20px;
+    outline: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.btn-default:hover {
+    background: blue;
+    color: #fff;
+}
