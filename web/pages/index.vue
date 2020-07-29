@@ -53,7 +53,7 @@
         :key="item._id"
       >
         <div class="thumbnail">
-          <img v-lazy="item.thumbnailUrl" alt />
+          <img v-lazy="item.thumbnail.url" alt />
         </div>
         <div class="info">
           <p class="time">{{ item.date | dateFormat }}</p>
@@ -63,12 +63,12 @@
             >
           </h2>
           <div class="describe">
-            {{ item.content }}
+            {{ item.describe }}
           </div>
           <div class="stuff">
             <div>
               <i class="iconfont icon-text"></i>
-              <span>{{ item.readNum }}</span>
+              <span>{{ item.words }}</span>
             </div>
             <div>
               <i class="iconfont icon-view"></i>

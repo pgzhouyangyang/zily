@@ -10,8 +10,7 @@
                 <span>喜欢&nbsp;{{info.likeNum}}</span>
                 <span></span>
             </div>
-            <div class="content">
-                {{info.content}}
+            <div class="content" v-html="info.contentHtml">
             </div>
         </section>
     </div>

@@ -1,14 +1,22 @@
 const mongo = require("mongoose")
 const ArticleSchema = new mongo.Schema({
-    title: {
-        type: Number, 
+    caption: {
+        type: String, 
         required: true
     },
-    date: String,
+    date: {
+        type: String,
+        default: new Date().format("YYYY-MM-DD HH:mm:ss")
+    },
     content: {
         type: String, 
         required: true
     },
+    describe: String,
+    contentHtml: String,
+    words: Number,
+    status: Number,
+    public: Number,
     readNum: {
         type: Number,
         default: 0
@@ -17,13 +25,33 @@ const ArticleSchema = new mongo.Schema({
         type: Number,
         default: 0
     },
-    thumbnailUrl: {
-        type: String,
-        default: ""
+    thumbnail: {
+        url: {
+            type: String,
+            default: ""
+        },
+        name: {
+            type: String,
+            default: ""
+        }
     },
     music: {
+        url: {
+            type: String,
+            default: ""
+        },
+        name: {
+            type: String,
+            default: ""
+        }
+    },
+    author: {
         type: String,
-        default: ""
+        default: "admin"
+    },
+    isTop: {
+        type: Boolean,
+        default: false
     }
 })
 

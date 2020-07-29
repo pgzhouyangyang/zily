@@ -25,7 +25,7 @@
 
         <div class="music-progress" :style="{width: progress}"></div>
         <audio id="music" loop="loop" preload="auto" ref="music">
-            <source type="audio/mpeg" src="https://image.raindays.cn/Mood/music/1593475570865.mp3">
+            <source type="audio/mpeg" :src="info.music.url">
         </audio>
     </header>
 </template>
@@ -60,7 +60,6 @@ export default {
                 music.play();
                 this.timer = setInterval(()=> {
                     let progress = 100 * music.currentTime / duration;
-                    console.log(progress)
                     this.progress = progress + "%"
                 }, 50)
             } else {

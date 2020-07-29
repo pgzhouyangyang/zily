@@ -4,7 +4,7 @@ const dbName = "zily";
 module.exports = {
     connect() {
         mongoose.connect(url + dbName,{  
-            useNewUrlParser:true, 
+            useNewUrlParser: true, 
             useUnifiedTopology: true 
         });
         mongoose.connection.on('connected', () => {
