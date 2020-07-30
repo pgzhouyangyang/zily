@@ -1,7 +1,7 @@
 <template>
   <div class="article">
     <div class="table-header">
-      <el-form :inline="true" :model="search" size="small ">
+      <el-form :inline="true" ref="searchForm" :model="search" size="small ">
         <el-form-item label="标题：">
           <el-input v-model="search.caption" clearable placeholder="标题"></el-input>
         </el-form-item>
@@ -12,10 +12,10 @@
           <el-input v-model="search.author" clearable placeholder="作者"></el-input>
         </el-form-item>
         <el-form-item label="开始日期：">
-          <el-date-picker v-model="search.startDate" type="date" placeholder="选择日期"></el-date-picker>
+          <el-date-picker v-model="search.startDate" value-format="yyyy-MM-dd"  type="date" placeholder="选择日期"></el-date-picker>
         </el-form-item>
         <el-form-item label="结束日期：">
-          <el-date-picker v-model="search.endDate" type="date" placeholder="选择日期"></el-date-picker>
+          <el-date-picker v-model="search.endDate" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onsearch" size="mini">查询</el-button>
@@ -118,6 +118,15 @@ export default {
       this.getData();
     },
     onreset() {
+      this.$refs.searchForm.resetFields();
+      this.$refs["searchForm"].resetFields();
+      this.search = {
+          caption: "",
+          key: "",
+          author: "",
+          startDate: "",
+          endDate: "",
+      }
       this.getData();
     },
     async getData() {

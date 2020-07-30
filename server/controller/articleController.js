@@ -4,15 +4,35 @@ const ObjectId = require('mongodb').ObjectId;
 class ArticleController {
     // 获取文章列表
     async getList(req, res) {
+
+        let query = {
+            caption: {"$regex": req.query.caption || ""},
+            author: {"$regex": req.query.author || ""}
+        };
+        for (const key in req.query) {
+            let value = req.query[key];
+            if(!value || value == "null" ||value == "undefined") {
+                delete req.query[key]
+            }
+        }
+
         let {pageSize, pageNow} = req.query;
-        let totalSize = await ArticleSchema.count();
-        let query = req.query
-        let data = await ArticleSchema.find({
-            // caption: {"$regex": query.caption},
-            // author: {"$regex": query.author},
-            // date: {"$gte": query.startDate, "$lte": query.endDate},
-           
-        }).limit(Number(pageSize)).skip((pageNow-1) * Number(pageSize));
+        let totalSize = await ArticleSchema.countDocuments();
+        if(req.baseUrl == "/web") {
+            query.status = 1
+        }
+        if(req.query.startDate && req.query.endDate) {
+            query.date = {"$gte": req.query.startDate, "$lte": req.query.endDate}
+        } else {
+            if(req.query.startDate) {
+                query.date = {"$gte": req.query.startDate}
+            }
+            if(req.query.endDate) {
+                query.date = {"$lte": req.query.endDate}
+            }
+        }
+        console.log(query)
+        let data = await ArticleSchema.find(query).limit(Number(pageSize)).skip((pageNow-1) * Number(pageSize));
         let result = {
             data: data,
             totalSize,
