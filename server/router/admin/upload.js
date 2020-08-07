@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer  = require('multer');
 const fs = require('fs');
+const ArticleSchema = require("../../model/article")
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const name = file.mimetype.includes('image') ? 'images' : 'music';
@@ -25,9 +26,16 @@ router.post("/upload", upload.single('file'), (req, res)=> {
 })
 // 删除文件
 router.post("/deleteFile", async (req, res)=> {
-    const localFile = `./${req.body.url}`;
+    let url = req.body.url;
+    const localFile = `./${url}`;
     fs.unlinkSync(localFile);
     
+    // 删除文章关联url
+    let article = await ArticleSchema.findOne({
+      "$or": [{"thumbnail.url": url }, {"thumbnail.url": url }]
+    })
+    let prop = article.thumbnail.url == url ? "thumbnail" : "music";
+    await ArticleSchema.findByIdAndUpdate(article._id, {[prop]: {}})
     res.json({
         status:  100,
         msg: '删除成功'

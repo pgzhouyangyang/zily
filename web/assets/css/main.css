@@ -19,6 +19,7 @@ a {
 	color: inherit;
 	text-decoration: none;
 	display: inline-block;
+	vertical-align: top;
 }
 img {
 	vertical-align: top;

@@ -15,4 +15,7 @@ router.post("/article", ArticleController.saveArticle)
 
 // 删除文章
 router.post("/deleteArticle/:id", ArticleController.deleteArticle)
+
+// 更新状态
+router.post("/updateStatus/:id", ArticleController.updateStatus)
 module.exports = router

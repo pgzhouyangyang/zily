@@ -4,24 +4,31 @@
     <div class="content">
       <header class="header">
         <div class="toolbar-content">
-          <div class="toolbar-items">
+          <!-- <div class="toolbar-items">
             <i class="el-icon-message-solid"></i>
           </div>
           <div class="toolbar-items">
             <i class="el-icon-s-tools"></i>
-          </div>
+          </div> -->
           <div class="toolbar-items">
-            <el-dropdown trigger="click">
-              <img src="../assets/images/20190630224926258000000.jpg" alt />
+            <el-dropdown trigger="click" @command="command">
+              <img :src="avatarSrc" alt />
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item icon="el-icon-user-solid">个人中心</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-close">退出登录</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-user-solid" command="usercenter">个人中心</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-close" command="loginout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
         </div>
       </header>
-      <div class="breadcrumb"></div>
+      <div class="breadcrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <template  v-for="(item, index) in breadcrumb">
+            <el-breadcrumb-item :key="index" :to="{path: item.path || '/'}" v-if="path != '/'">{{item.meta.routerName}}</el-breadcrumb-item> 
+          </template>
+          
+        </el-breadcrumb>
+      </div>
       <main class="main">
         <router-view></router-view>
       </main>
@@ -30,9 +37,40 @@
 </template>
 <script>
 import AsideBar from "@/components/asideBar";
+import defaultAvatar from "../assets/images/2.jpg"
 export default {
   data() {
-    return {};
+    return {
+      userInfo: this.$store.state,
+      breadcrumb: [],
+      path: this.$route.path
+    };
+  },
+  created() {
+    this.breadcrumb = this.$route.matched
+  },
+  computed: {
+    avatarSrc() {
+      return this.userInfo.avatar || defaultAvatar
+    }
+  },
+  watch: {
+     $route(newRoute) {
+      this.breadcrumb = newRoute.matched;
+      this.path = newRoute.path;
+    }
+  },
+  methods: {
+    command(val) {
+      this[val].call(this)
+    },
+    loginout() {
+      this.$store.commit("clearUserInfo");
+      this.$router.replace("/login")
+    },
+    usercenter() {
+      this.$router.replace("/userCenter")
+    }
   },
   components: {
     AsideBar,
@@ -44,7 +82,7 @@ export default {
   height: 64px;
   background: #fff;
   color: rgba(0, 0, 0, 0.87);
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   position: sticky;
   /* top: 0;
   background: #fff;
@@ -92,5 +130,8 @@ export default {
   width: 100%;
   height: 100%;
   display: block;
+}
+.breadcrumb {
+   padding: 20px;
 }
 </style>

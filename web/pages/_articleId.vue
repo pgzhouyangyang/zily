@@ -1,7 +1,7 @@
 <template>
     <div class="article-detail">
         <scroll-bar></scroll-bar>
-        <tab-bar :info="info" :showTitle="showTitle"></tab-bar>
+        <tab-bar :info="info" :showTitle="showTitle" @like="like"></tab-bar>
         <section>
             <h1 class="title" ref="title">{{info.caption}}</h1>
             <div class="stuff">
@@ -30,6 +30,11 @@ export default {
             this.showTitle = !entries[0].isIntersecting
         })
         this.io.observe(this.$refs.title)
+    },
+    methods: {
+        like() {
+            this.info.likeNum ++
+        }
     },
     filters: {
         dateFormat(value) {

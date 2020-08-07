@@ -2,23 +2,26 @@
     <header class="tab-bar">
         <div>
             <span class="icon logo"><nuxt-link to="/">丸</nuxt-link></span>
-            <span v-if="!player" class="icon iconfont icon-pause player" @click="onplayer"></span>
-            <span v-else class="icon playing" @click="onplayer">
-                <span class="line1"></span>
-                <span class="line2"></span>
-                <span class="line3"></span>
-                <span class="line4"></span>
-                <span class="line5"></span>
-            </span>
+            <template v-if="info.music.url">
+                 <span v-if="!player" class="icon iconfont icon-pause player" @click="onplayer"></span>
+                    <span v-else class="icon playing" @click="onplayer">
+                        <span class="line1"></span>
+                        <span class="line2"></span>
+                        <span class="line3"></span>
+                        <span class="line4"></span>
+                        <span class="line5"></span>
+                    </span>
+            </template>
+           
         </div>
         <div >
             <h3 class="title" :class="[showTitle ? 'active' : '']">{{info.caption}}</h3>
         </div>
-        <div>
+        <div style="flex: 0 0 auto">
             <span></span>
             <span class="icon iconfont icon-like like" :class="[like ? 'liked' : '']" @click="onlike"></span>
             <span class="icon portrait">
-                <nuxt-link to="about"> <img src="https://image.raindays.cn/Mood/image/1593794583505.jpeg"></nuxt-link>
+                <nuxt-link to="about"> <img src="../static/images/7.jpg"></nuxt-link>
                 
             </span>
         </div>
@@ -45,12 +48,21 @@ export default {
             timer: null
         }
     },
+    mounted() {
+        this.like = localStorage.getItem(`like-${this.info._id}`)
+    },
     destroyed() {
         clearInterval(this.timer);
     },
     methods: {
-        onlike() {
-            this.like = !this.like;
+        async onlike() {
+            if(this.like) {
+                return 
+            }
+            await this.$axios.post(`/article_like/${this.info._id}`)
+            this.like = true;
+            localStorage.setItem(`like-${this.info._id}`, true);
+            this.$emit("like")
         },
         onplayer() {
             let music = this.$refs.music;
@@ -99,17 +111,20 @@ export default {
              cursor: pointer;
              color: #888;
              transition: all 0.3s;
+             line-height: 26px;
             
         }
         .logo {
-            font-family: cursive;
+            font-family: monospace;
             font-weight: bold;
             color: #333;
+            font-size: 20px;
         }
         .portrait img{
             width: 100%;
             height: 100%;
-            vertical-align: top
+            vertical-align: top;
+            border-radius: 50%;
         }
         .like:hover {
             color: #ef6d57;;
@@ -123,6 +138,7 @@ export default {
             font-size: 14px;
             opacity: 0;
             transition: all 0.3s;
+            padding: 0 10px;
             &.active {
                 opacity: 1;
             }

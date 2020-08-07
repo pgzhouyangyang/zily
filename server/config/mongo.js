@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const url = "mongodb://localhost:27017/";
 const dbName = "zily";
+mongoose.set('useFindAndModify', false)
 module.exports = {
     connect() {
         mongoose.connect(url + dbName,{  

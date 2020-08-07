@@ -1,0 +1,99 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	box-sizing: border-box;
+}
+div, p, li, ol, span, a, input,textarea{
+	font-size: 14px;
+	font-family: "eafont", "Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+
+  .card-box {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    padding: 16px;
+  }
+  .card-header {
+    padding: 16px;
+    background: #409eff;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #fff;
+    margin-top: -40px;
+    box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2),
+      0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+  }
+  .card-content {
+    padding: 50px 0 16px 0;
+  }
+  
+  .upload-block .el-upload__tip {
+    line-height: 1;
+    padding-left: 20px;
+    color: #999;
+  }
+
+
+  .cover-wrap {
+    width: 32px;
+    height: 32px;
+  }
+  .cover-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .table-header {
+    display: flex;
+    /* justify-content: flex-end; */
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12);
+    padding: 30px 15px 15px;
+  }
+  .table-header .el-form {
+    width: 100%;
+  }
+  .table-actions {
+    /* margin: 20px 0; */
+    padding: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12);
+  }
+  .table-wrapper {
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12);
+  }
+  .table-footer {
+    margin-top: 18px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+
+
+  .actions {
+    white-space: nowrap;
+  }
+  
+  .actions a {
+    height: 32px;
+    width: 32px;
+    box-sizing: border-box;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 50%;
+    padding: 5px;
+    color: #999;
+  }
+  .actions a:hover {
+    background: #eee;
+    color: #555;
+  }
+
+  .el-link--inner {
+    font-weight: bold;
+  }
