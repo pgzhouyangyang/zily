@@ -18,7 +18,7 @@ class ArticleController {
         }
 
         let { pageSize, pageNow } = req.query;
-        let totalSize = await ArticleSchema.countDocuments();
+       
         if (req.baseUrl == "/web") {
             query.status = 1;
             query.isTop = false;
@@ -33,6 +33,7 @@ class ArticleController {
                 query.date = { "$lte": req.query.endDate + " 23:59:59" }
             }
         }
+        let totalSize = await ArticleSchema.countDocuments(query);
         let data = await ArticleSchema.find(query).limit(Number(pageSize)).skip((pageNow - 1) * Number(pageSize)).sort("-date");
         let result = {
             data: data,

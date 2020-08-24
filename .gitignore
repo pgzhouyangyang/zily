@@ -1,13 +1,10 @@
-web/node_modules/
-web/.gitignore
-web/.vscode
-web/nuxt
-web/.editorconfig
-server/node_modules/
+/admin/dist
+/admin/node_modules
+/web/node_modules
+/web/.nuxt
 
-admin/node_modules/
-admin/.gitignore
-
+/server/node_modules
+/server/uploads
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs
@@ -98,4 +95,3 @@ sw.*
 
 # Vim swap files
 *.swp
-.gitignore

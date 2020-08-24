@@ -16,7 +16,10 @@ const User = new mongo.Schema({
     address1: String,
     introduction: String,
     avatar: String,
-    name: String,
+    name: {
+        type: String,
+        default: ""
+    },
     phone: String,
     age: String,
     status: {

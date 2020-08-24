@@ -99,6 +99,7 @@
               @imgAdd="imgAdd"
               @imgDel="imgDel"
               style="min-height:800px"
+              ref="editor"
             ></mavon-editor>
           </el-form-item>
           <el-form-item style="text-align: center">
@@ -114,7 +115,6 @@
 <script>
 import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
-// import { delete } from 'vue/types/umd';
 export default {
   data() {
     return {
@@ -285,8 +285,26 @@ export default {
       this.form.contentHtml = render;
       this.form.words = value.length;
     },
-    imgAdd() {},
-    imgDel() {},
+    async imgAdd(pos, $file) {
+      let fd = new FormData();
+      fd.append("file",  $file);
+      const result = await fetch("/upload", {
+        method: "POST",
+        body: fd,
+        headers: {
+          // 'Content-Type': 'multipart/form-data'
+        },
+      });
+
+      this.$refs.editor.$img2Url(pos, result.url);
+    },
+    imgDel(pos) {
+     console.log(pos)
+     fetch("/deleteFile", {
+        method: "POST",
+        body: JSON.stringify({ url:pos[0] }),
+      });
+    },
   },
   components: {
     mavonEditor,

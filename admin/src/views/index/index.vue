@@ -8,7 +8,7 @@
           </div>
           <div class="card-text">
             <p>文章数量</p>
-            <h3>50</h3>
+            <h3 v-numAdd="panelData.aCount">0</h3>
           </div>
           <div class="hr"></div>
           <div class="card-bottom">
@@ -23,7 +23,7 @@
           </div>
           <div class="card-text">
             <p>用户总数</p>
-            <h3>50</h3>
+            <h3 v-numAdd="panelData.uCount">0</h3>
           </div>
           <div class="hr"></div>
           <div class="card-bottom">
@@ -41,7 +41,7 @@
           </div>
           <div class="card-text">
             <p>今日新增文章</p>
-            <h3>50</h3>
+            <h3 v-numAdd="panelData.aAdd">0</h3>
           </div>
           <div class="hr"></div>
           <div class="card-bottom">
@@ -59,11 +59,11 @@
           </div>
           <div class="card-text">
             <p>今日新增注册用户</p>
-            <h3>50</h3>
+            <h3 v-numAdd="panelData.uAdd">0</h3>
           </div>
           <div class="hr"></div>
           <div class="card-bottom">
-            <i></i> 最后更新于刚刚
+             <i class="el-icon-refresh"></i> 最后更新于刚刚
           </div>
         </div>
       </el-col>
@@ -142,11 +142,18 @@ export default {
       pageSize: 20,
       pageNow: 1,
       total: 0,
-      tableData: []
+      tableData: [],
+      panelData: {},
     };
   },
   created() {
     this.getData();
+    fetch("/indexInfo").then(res=> {
+      this.panelData = res.body;
+    })
+
+  },
+  computed: {
   },
   methods: {
     async getData() {

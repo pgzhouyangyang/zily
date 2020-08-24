@@ -104,7 +104,7 @@ class UserController {
         let result = await UsreSchema.findByIdAndUpdate(id, {status})
         res.send(requestFormat(result ? {} : null))
     }
-      // 根据id获取文章
+      // 根据id获取
     async getUser(req, res) {
         let id = req.params.id;
         let result = await UsreSchema.findOne({"_id": ObjectId(id)})
