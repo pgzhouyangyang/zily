@@ -2,7 +2,7 @@
 <transition name="slide">
   <div class="nav" v-show="show">
     <ul class="nav-list">
-      <li><nuxt-link to="/">Article</nuxt-link></li>
+      <li><nuxt-link to="/article">Article</nuxt-link></li>
       <li><nuxt-link to="/about">About</nuxt-link></li>
     </ul>
   </div>

@@ -19,7 +19,7 @@
         </div>
         <div style="flex: 0 0 auto">
             <span></span>
-            <span class="icon iconfont icon-like like" :class="[like ? 'liked' : '']" @click="onlike"></span>
+            <span v-if="showLike" class="icon iconfont icon-like like" :class="[like ? 'liked' : '']" @click="onlike"></span>
             <span class="icon portrait">
                 <nuxt-link to="about"> <img src="../static/images/7.jpg"></nuxt-link>
                 
@@ -36,9 +36,18 @@
 export default {
     props: {
         info: {
-            type: Object
+            type: Object,
+            default() {
+                return {
+                    music: {}
+                }
+            }
         },
         showTitle: false,
+        showLike: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
@@ -99,6 +108,7 @@ export default {
         transition: all .3s;
         font-size: 24px;
         background: #fff;
+        z-index: 10;
         &>div:first-of-type,  &>div:last-of-type {
              flex: 0 0 auto;
         }
