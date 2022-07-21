@@ -1,6 +1,6 @@
 <template>
     <header class="tab-bar">
-        <div>
+        <div style="flex: 0 0 auto">
             <span class="icon logo"><nuxt-link to="/">丸</nuxt-link></span>
             <span v-if="!player" class="icon iconfont icon-pause player" @click="onplayer"></span>
             <span v-else class="icon playing" @click="onplayer">
@@ -14,10 +14,10 @@
         <div >
             <h3 class="title" :class="[showTitle ? 'active' : '']">{{info.caption}}</h3>
         </div>
-        <div>
+        <div style="flex: 0 0 auto">
             <span></span>
             <span class="icon iconfont icon-like like" :class="[like ? 'liked' : '']" @click="onlike"></span>
-            <span class="icon portrait">
+            <span class="icon portrait" >
                 <nuxt-link to="about"> <img src="https://image.raindays.cn/Mood/image/1593794583505.jpeg"></nuxt-link>
                 
             </span>
@@ -123,6 +123,7 @@ export default {
             font-size: 14px;
             opacity: 0;
             transition: all 0.3s;
+            padding: 0 5px;
             &.active {
                 opacity: 1;
             }

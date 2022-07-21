@@ -18,7 +18,7 @@
       <div class="mask"></div>
 
       <section>
-        <p class="time">{{ "2020-03-06" | dateFormat }}</p>
+        <p class="time">{{ "2020-07-18" | dateFormat }}</p>
         <h2 class="title">
           <nuxt-link to="/">水调歌头·游泳</nuxt-link>
         </h2>
