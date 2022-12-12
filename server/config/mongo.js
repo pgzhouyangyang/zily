@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const url = "mongodb://localhost:27017/";
+const url = `mongodb://${process.env.MONGO_HOST || 'localhost'}:27017/`;
 const dbName = "zily";
 module.exports = {
     connect() {
